@@ -73,7 +73,7 @@ def _v1_spec():
                 'url': 'http://www.apache.org/licenses/LICENSE-2.0.html'
             }
         },
-        'host': MY_IP+':'+PORT,
+        'host': MY_IP+':'+str(PORT),
         'basePath': '/v1',
         'paths': {
             '/parsey-universal-full': {
