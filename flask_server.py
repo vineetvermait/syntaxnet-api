@@ -78,6 +78,7 @@ def _v1_spec():
         'paths': {
             '/parsey-universal-full': {
                 'post': {
+                    'tags': ['Parsey Universal'],
                     'summary': 'Executes the full parsing pipeline against Parsey Universal',
                     'description': 'See also https://github.com/tensorflow/models/blob/master/syntaxnet/universal.md',
                     'parameters': [
