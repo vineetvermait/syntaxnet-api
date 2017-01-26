@@ -109,4 +109,4 @@ def _v1_spec():
 
 _flask_app.register_blueprint(build_static_blueprint('swaggerui', __name__))
 
-_flask_app.run(port=7000)
+_flask_app.run(port=7000, host='0.0.0.0')
