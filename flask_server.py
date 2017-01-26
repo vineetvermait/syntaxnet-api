@@ -16,11 +16,24 @@ from flask import Flask, request, jsonify, redirect
 from flask_swaggerui import build_static_blueprint, render_swaggerui
 from werkzeug.exceptions import BadRequest
 
+import requests as req
+
 import parsey
 
 # Flask setup
 _flask_app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
+
+
+def generate_url(host, protocol='http', port=80, dir=''):
+
+    if isinstance(dir, list):
+        dir = '/'.join(dir)
+
+    return "%s://%s:%d/%s" % (protocol, host, port, dir)
+
+MY_IP = req.get(generate_url('jsonip.com')).json()['ip']
+PORT = 7000
 
 
 @_flask_app.route('/')
@@ -60,7 +73,7 @@ def _v1_spec():
                 'url': 'http://www.apache.org/licenses/LICENSE-2.0.html'
             }
         },
-        'host': 'syntaxnet.askplatyp.us',
+        'host': MY_IP+':'+PORT,
         'basePath': '/v1',
         'paths': {
             '/parsey-universal-full': {
@@ -109,4 +122,4 @@ def _v1_spec():
 
 _flask_app.register_blueprint(build_static_blueprint('swaggerui', __name__))
 
-_flask_app.run(port=7000, host='0.0.0.0')
+_flask_app.run(port=PORT, host='0.0.0.0')
